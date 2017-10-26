@@ -1,104 +1,108 @@
-# linked list implementation 
+# linked list implementation
+
 
 class Node(object):
 
-	def __init__(self,value,next=None):
-		
-		self.value =value
-		self.next=None 
+    def __init__(self, value, next=None):
+
+        self.value = value
+        self.next = None
 
 
 class LinkedList(object):
 
-	def __init__(self):
-		
-		self.head =None 
-		self.tail =None 
+    def __init__(self):
 
-	def add_begin (self,value ):
-		
-		if self.head==None:
-			self.head =self.tail = Node(value )
-			self.head.next =self.tail.next =None 
-		else:
-			self.head.next = Node(value )
-			self.head = self.head.next
+        self.head = None
+        self.tail = None
 
-	def add_end(self,value ):
-		
-		if self.head==None:
-			self.head= self.tail=Node(value )
-			self.head.next=self.tail.next =None 
-		else:
-			dummy =Node(value)
-			dummy.next = self.tail
-			self.tail = dummy 
+    def add_begin(self, value):
 
+        if self.head is None:
+            self.head = self.tail = Node(value)
+            self.head.next = self.tail.next = None
+        else:
+            self.head.next = Node(value)
+            self.head = self.head.next
 
-	def traverse(self):
+    def add_end(self, value):
 
-		r= self.tail
-		while r :
-			print(r.value )	
-			r=r.next
+        if self.head is None:
+            self.head = self.tail = Node(value)
+            self.head.next = self.tail.next = None
+        else:
+            dummy = Node(value)
+            dummy.next = self.tail
+            self.tail = dummy
 
-	
-	def find (self,value):
+    def traverse(self):
 
-		index =0
-		r= self.tail 
-		while r and r.value !=value: 
-			r=r.next
-			index +=1  
+        r = self.tail
+        while r:
+            print(r.value,end='->')
+            r = r.next
 
-		if r==None:
-			return 0
-		else:
-			return index 
+    def find(self, value):
 
+        index = 0
+        r = self.tail
+        while r and r.value != value:
+            r = r.next
+            index += 1
 
-	def delete(self,value):
-		is_present = self.find(value )
-		if is_present:
-			if self.head.value ==value :           # start element 
-				r= self.tail 
-				while r.next!=self.head:
-					r= r.next 
-				self.head=r 
-				del(r.next)
-				self.head.next = None 
+        if r is None:
+            return 0
+        else:
+            return index
 
-			elif self.tail.value ==value:			# end element 
-				temp = self.tail 
-				dummy =self.tail.next 
-				self.tail = dummy
-				del(temp) 
+    def delete(self, value):
+        is_present = self.find(value)
+        if is_present:
+            if self.head.value == value:           # start element
+                r = self.tail
+                while r.next != self.head:
+                    r = r.next
+                self.head = r
+                del(r.next)
+                self.head.next = None
 
-			else :
-				r= self.tail  						# deleting middle elements 
-				while r and r.value !=value:
-					prev = r 
-					r= r.next 
-					curr = r 
+            elif self.tail.value == value:			# end element
+                temp = self.tail
+                dummy = self.tail.next
+                self.tail = dummy
+                del(temp)
 
-				if r is not None:
-					prev.next = curr.next 
-					curr.next=None 
-					del(curr)
+            else:
+                r = self.tail  						# deleting middle elements
+                while r and r.value != value:
+                    prev = r
+                    r = r.next
+                    curr = r
 
+                if r is not None:
+                    prev.next = curr.next
+                    curr.next = None
+                    del(curr)
 
+        else:
+            print ("value not found ")
 
-		else:
-			print ("value not found ")
+    def get_head(self):															"""completely confused up by what's tail and 
+    																			head""" 
+        return self.head
+
+    def get_tail(self):
+    	return self.tail 
+
 
 if __name__ == '__main__':
-	l=LinkedList() 
-	l.add_begin(5)
-	l.add_begin(6)
-	l.add_begin(7)
-	l.add_begin(8)
-	l.add_end(4)
-	l.traverse()
-	l.delete(7) 
-	l.traverse()
-	l.delete(7)
+    l = LinkedList()
+    l.add_begin(5)
+    l.add_begin(6)
+    l.add_begin(7)
+    l.add_begin(8)
+    l.add_end(4)
+    l.traverse()
+    l.delete(7)
+    l.traverse()
+    l.delete(7)
